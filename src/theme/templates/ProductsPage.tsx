@@ -10,18 +10,26 @@ interface ProductsPageProps {
 export function ProductsPage({ products }: ProductsPageProps) {
   return (
     <div
-      className="mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="mx-auto px-6 lg:px-16 py-16"
       style={{ maxWidth: 'var(--container-max)' }}
     >
-      {/* Page header */}
-      <div className="mb-10">
+      <div className="mb-12">
+        <p
+          className="text-[11px] font-normal uppercase tracking-[0.25em] mb-2"
+          style={{ color: 'var(--color-text-muted)' }}
+        >
+          Collectie
+        </p>
         <h1
-          className="text-3xl font-bold mb-2"
+          className="text-2xl font-light tracking-wide mb-2"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
           Alle producten
         </h1>
-        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+        <p
+          className="text-[12px] font-extralight"
+          style={{ color: 'var(--color-text-subtle)' }}
+        >
           {products.length} product{products.length !== 1 ? 'en' : ''} gevonden
         </p>
       </div>

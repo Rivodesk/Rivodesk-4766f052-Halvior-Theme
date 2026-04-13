@@ -21,28 +21,31 @@ export function CheckoutPage() {
   if (totalItems === 0 && !done) {
     return (
       <div
-        className="mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center"
+        className="mx-auto px-6 lg:px-16 py-24 text-center"
         style={{ maxWidth: 'var(--container-max)' }}
       >
         <ShoppingBag
-          className="h-16 w-16 mx-auto mb-4 opacity-20"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="h-12 w-12 mx-auto mb-4 opacity-10"
+          style={{ color: 'var(--color-text)' }}
         />
         <h1
-          className="text-2xl font-bold mb-2"
+          className="text-xl font-light tracking-wide mb-3"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
           Je winkelwagen is leeg
         </h1>
-        <p className="text-sm mb-6" style={{ color: 'var(--color-text-muted)' }}>
+        <p
+          className="text-[13px] font-extralight mb-8"
+          style={{ color: 'var(--color-text-muted)' }}
+        >
           Voeg producten toe om verder te gaan met afrekenen.
         </p>
         <a
           href="/products"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          style={{ backgroundColor: 'var(--color-primary)' }}
+          className="inline-flex items-center gap-2 px-8 py-4 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-90"
+          style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
         >
-          Ga winkelen
+          Bekijk collectie
         </a>
       </div>
     );
@@ -50,26 +53,26 @@ export function CheckoutPage() {
 
   return (
     <div
-      className="mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="mx-auto px-6 lg:px-16 py-12"
       style={{ maxWidth: 'var(--container-max)' }}
     >
-      {/* Page header */}
-      <div className="mb-8 flex items-center gap-2">
+      <div className="mb-10 flex items-center gap-3">
         <h1
-          className="text-2xl font-bold"
+          className="text-xl font-light tracking-wide"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
           Afrekenen
         </h1>
         <span
-          className="inline-flex items-center gap-1 text-xs text-green-700 bg-green-50 px-2 py-0.5 rounded-full border border-green-200"
+          className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.1em] px-2 py-0.5 border"
+          style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-subtle)' }}
         >
           <Lock className="h-3 w-3" />
           Beveiligd
         </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Left: checkout form */}
         <div>
           <CheckoutForm onDone={handleDone} />
@@ -78,11 +81,11 @@ export function CheckoutPage() {
         {/* Right: order summary */}
         <div className="lg:order-first xl:order-last">
           <div
-            className="rounded-2xl border p-6 sticky top-24"
+            className="border p-6 sticky top-24"
             style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg-secondary)' }}
           >
             <h2
-              className="text-base font-semibold mb-5"
+              className="text-[11px] font-normal uppercase tracking-[0.18em] mb-6"
               style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
             >
               Besteloverzicht
@@ -91,10 +94,9 @@ export function CheckoutPage() {
             <ul className="space-y-4 mb-5">
               {items.map(item => (
                 <li key={item.variantId} className="flex gap-3 items-start">
-                  {/* Thumbnail */}
                   <div
-                    className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0"
-                    style={{ backgroundColor: 'var(--color-border)' }}
+                    className="relative w-14 h-14 overflow-hidden flex-shrink-0"
+                    style={{ backgroundColor: 'var(--color-bg-elevated)' }}
                   >
                     {item.imageUrl ? (
                       <Image
@@ -106,16 +108,12 @@ export function CheckoutPage() {
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <ShoppingBag
-                          className="h-6 w-6 opacity-30"
-                          style={{ color: 'var(--color-text-muted)' }}
-                        />
+                        <span className="text-lg font-thin opacity-[0.05]" style={{ color: 'var(--color-text)' }}>H</span>
                       </div>
                     )}
-                    {/* Qty badge */}
                     <span
-                      className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                      style={{ backgroundColor: 'var(--color-primary)' }}
+                      className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-[10px] font-bold"
+                      style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
                     >
                       {item.quantity}
                     </span>
@@ -123,19 +121,22 @@ export function CheckoutPage() {
 
                   <div className="flex-1 min-w-0">
                     <p
-                      className="text-sm font-medium line-clamp-1"
+                      className="text-[12px] font-normal uppercase tracking-[0.06em] line-clamp-1"
                       style={{ color: 'var(--color-text)' }}
                     >
                       {item.title}
                     </p>
                     {item.variantTitle !== 'Default Title' && (
-                      <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                      <p className="text-[11px] mt-0.5 font-extralight" style={{ color: 'var(--color-text-muted)' }}>
                         {item.variantTitle}
                       </p>
                     )}
                   </div>
 
-                  <span className="text-sm font-semibold flex-shrink-0" style={{ color: 'var(--color-text)' }}>
+                  <span
+                    className="text-[12px] font-normal flex-shrink-0"
+                    style={{ color: 'var(--color-text)' }}
+                  >
                     {formatPrice(item.price * item.quantity)}
                   </span>
                 </li>
@@ -146,29 +147,22 @@ export function CheckoutPage() {
               className="border-t pt-4 space-y-2"
               style={{ borderColor: 'var(--color-border)' }}
             >
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-[12px]">
                 <span style={{ color: 'var(--color-text-muted)' }}>Subtotaal</span>
                 <span style={{ color: 'var(--color-text)' }}>{formatPrice(totalPrice)}</span>
               </div>
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-[12px]">
                 <span style={{ color: 'var(--color-text-muted)' }}>Verzending</span>
-                <span className="text-green-600 font-medium">Gratis</span>
+                <span style={{ color: 'var(--color-text-muted)' }}>Gratis</span>
               </div>
               <div
-                className="flex justify-between font-bold text-base pt-3 border-t"
+                className="flex justify-between font-normal text-base pt-3 border-t"
                 style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
               >
                 <span>Totaal</span>
                 <span>{formatPrice(totalPrice)}</span>
               </div>
             </div>
-
-            <p
-              className="text-xs text-center mt-4"
-              style={{ color: 'var(--color-text-muted)' }}
-            >
-              Inclusief BTW. Veilig betalen via Stripe.
-            </p>
           </div>
         </div>
       </div>

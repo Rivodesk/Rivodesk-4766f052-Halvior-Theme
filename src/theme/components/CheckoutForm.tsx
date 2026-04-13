@@ -69,7 +69,7 @@ function StripePaymentForm({ clientSecret, customerName, onDone }: StripePayment
       <button
         type="submit"
         disabled={loading || !stripe}
-        className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 py-3.5 px-6 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ backgroundColor: 'var(--color-primary)' }}
       >
         {loading ? (
@@ -157,11 +157,11 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
   };
 
   const fieldClass =
-    'w-full px-3 py-2.5 rounded-lg border text-sm outline-none focus:ring-2 transition-all';
+    'w-full px-4 py-3 border text-[13px] font-extralight outline-none transition-all';
   const fieldStyle = {
     borderColor: 'var(--color-border)',
     color: 'var(--color-text)',
-    backgroundColor: 'var(--color-bg)',
+    backgroundColor: 'transparent',
   };
 
   if (step === 'success') {
@@ -352,7 +352,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ backgroundColor: 'var(--color-primary)' }}
             >
               {loading ? (
@@ -377,10 +377,14 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
           options={{
             clientSecret,
             appearance: {
-              theme: 'stripe',
+              theme: 'night',
               variables: {
-                colorPrimary: '#1a1a2e',
-                borderRadius: '8px',
+                colorPrimary: '#F2EDE8',
+                colorBackground: '#111111',
+                colorText: '#F2EDE8',
+                colorTextSecondary: '#B8A692',
+                borderRadius: '0px',
+                fontFamily: 'Inter, system-ui, sans-serif',
               },
             },
           }}

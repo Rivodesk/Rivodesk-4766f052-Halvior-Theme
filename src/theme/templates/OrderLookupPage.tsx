@@ -1,26 +1,26 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { Search, Package, Loader2, CheckCircle, Truck, Clock } from 'lucide-react';
+import { Search, Package, Loader2 } from 'lucide-react';
 import { Order, formatPrice } from '@/lib/rivodesk';
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  paid: { label: 'Betaald', color: '#16a34a' },
-  pending: { label: 'In afwachting', color: '#d97706' },
+  paid: { label: 'Betaald', color: '#F2EDE8' },
+  pending: { label: 'In afwachting', color: '#B8A692' },
   refunded: { label: 'Terugbetaald', color: '#dc2626' },
-  voided: { label: 'Geannuleerd', color: '#6b7280' },
-  fulfilled: { label: 'Verzonden', color: '#2563eb' },
-  unfulfilled: { label: 'Nog niet verzonden', color: '#d97706' },
-  partial: { label: 'Gedeeltelijk verzonden', color: '#7c3aed' },
+  voided: { label: 'Geannuleerd', color: '#5C5C48' },
+  fulfilled: { label: 'Verzonden', color: '#F2EDE8' },
+  unfulfilled: { label: 'Nog niet verzonden', color: '#B8A692' },
+  partial: { label: 'Gedeeltelijk verzonden', color: '#B8A692' },
 };
 
 function statusBadge(status: string | null) {
   if (!status) return null;
-  const s = STATUS_LABELS[status.toLowerCase()] ?? { label: status, color: '#6b7280' };
+  const s = STATUS_LABELS[status.toLowerCase()] ?? { label: status, color: '#5C5C48' };
   return (
     <span
-      className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full text-white"
-      style={{ backgroundColor: s.color }}
+      className="inline-flex items-center gap-1 text-[10px] font-normal uppercase tracking-[0.12em] px-2.5 py-1 border"
+      style={{ borderColor: s.color, color: s.color }}
     >
       {s.label}
     </span>
@@ -57,29 +57,32 @@ export function OrderLookupPage() {
   };
 
   const fieldClass =
-    'w-full px-3 py-2.5 rounded-lg border text-sm outline-none focus:ring-2 transition-all';
+    'w-full px-4 py-3 border text-[13px] font-extralight outline-none transition-all';
 
   return (
     <div
-      className="mx-auto px-4 sm:px-6 lg:px-8 py-16"
+      className="mx-auto px-6 lg:px-16 py-20"
       style={{ maxWidth: 'var(--container-max)' }}
     >
       <div className="max-w-lg mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div
-            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
-            style={{ backgroundColor: 'var(--color-bg-secondary)' }}
+        <div className="text-center mb-12">
+          <p
+            className="text-[11px] font-normal uppercase tracking-[0.25em] mb-4"
+            style={{ color: 'var(--color-text-muted)' }}
           >
-            <Package className="h-7 w-7" style={{ color: 'var(--color-primary)' }} />
-          </div>
+            Bestellingen
+          </p>
           <h1
-            className="text-3xl font-bold mb-2"
+            className="text-2xl font-light tracking-wide mb-3"
             style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
           >
             Bestelling volgen
           </h1>
-          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          <p
+            className="text-[13px] font-extralight"
+            style={{ color: 'var(--color-text-muted)' }}
+          >
             Voer je bestelnummer en e-mailadres in om de status te bekijken.
           </p>
         </div>
@@ -87,15 +90,15 @@ export function OrderLookupPage() {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="rounded-2xl border p-6 space-y-4"
+          className="border p-6 space-y-4"
           style={{ borderColor: 'var(--color-border)' }}
         >
           <div>
             <label
-              className="block text-xs font-medium mb-1"
-              style={{ color: 'var(--color-text)' }}
+              className="block text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
+              style={{ color: 'var(--color-text-muted)' }}
             >
-              Bestelnummer *
+              Bestelnummer
             </label>
             <input
               type="text"
@@ -103,16 +106,20 @@ export function OrderLookupPage() {
               value={orderNumber}
               onChange={e => setOrderNumber(e.target.value)}
               className={fieldClass}
-              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+              style={{
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text)',
+                backgroundColor: 'transparent',
+              }}
               placeholder="bijv. 1001"
             />
           </div>
           <div>
             <label
-              className="block text-xs font-medium mb-1"
-              style={{ color: 'var(--color-text)' }}
+              className="block text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
+              style={{ color: 'var(--color-text-muted)' }}
             >
-              E-mailadres *
+              E-mailadres
             </label>
             <input
               type="email"
@@ -120,20 +127,24 @@ export function OrderLookupPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               className={fieldClass}
-              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+              style={{
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text)',
+                backgroundColor: 'transparent',
+              }}
               placeholder="je@email.nl"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
-            style={{ backgroundColor: 'var(--color-primary)' }}
+            className="w-full flex items-center justify-center gap-2 py-4 px-6 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
           >
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Zoeken…
+                Zoeken
               </>
             ) : (
               <>
@@ -144,39 +155,40 @@ export function OrderLookupPage() {
           </button>
 
           {error && (
-            <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">{error}</p>
+            <p
+              className="text-[12px] font-extralight px-3 py-2 border"
+              style={{ borderColor: 'rgba(220,38,38,0.3)', color: '#dc2626' }}
+            >
+              {error}
+            </p>
           )}
         </form>
 
         {/* Results */}
         {order && (
           <div
-            className="mt-6 rounded-2xl border overflow-hidden"
+            className="mt-8 border overflow-hidden"
             style={{ borderColor: 'var(--color-border)' }}
           >
-            {/* Order header */}
             <div
-              className="px-6 py-4 border-b"
-              style={{
-                borderColor: 'var(--color-border)',
-                backgroundColor: 'var(--color-bg-secondary)',
-              }}
+              className="px-6 py-5 border-b"
+              style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg-secondary)' }}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p
-                    className="text-xs font-medium uppercase tracking-wide"
+                    className="text-[10px] font-normal uppercase tracking-[0.18em]"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
                     Bestelling
                   </p>
                   <p
-                    className="text-lg font-bold"
+                    className="text-lg font-light tracking-wide"
                     style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
                   >
                     #{order.order_number}
                   </p>
-                  <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
+                  <p className="text-[11px] font-extralight mt-1" style={{ color: 'var(--color-text-muted)' }}>
                     {new Date(order.created_at).toLocaleDateString('nl-NL', {
                       day: 'numeric',
                       month: 'long',
@@ -191,36 +203,29 @@ export function OrderLookupPage() {
               </div>
             </div>
 
-            {/* Line items */}
             {Array.isArray(order.line_items) && order.line_items.length > 0 && (
-              <div className="px-6 py-4">
+              <div className="px-6 py-5">
                 <p
-                  className="text-xs font-semibold uppercase tracking-wide mb-3"
+                  className="text-[10px] font-normal uppercase tracking-[0.18em] mb-4"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   Producten
                 </p>
                 <ul className="space-y-3">
                   {order.line_items.map((item: any, i: number) => (
-                    <li key={i} className="flex items-center justify-between text-sm">
+                    <li key={i} className="flex items-center justify-between text-[13px]">
                       <div>
                         <span style={{ color: 'var(--color-text)' }}>{item.title}</span>
                         {item.variant_title && item.variant_title !== 'Default Title' && (
-                          <span
-                            className="text-xs ml-1"
-                            style={{ color: 'var(--color-text-muted)' }}
-                          >
+                          <span className="text-[11px] ml-1" style={{ color: 'var(--color-text-muted)' }}>
                             ({item.variant_title})
                           </span>
                         )}
-                        <span
-                          className="text-xs ml-2"
-                          style={{ color: 'var(--color-text-muted)' }}
-                        >
-                          × {item.quantity}
+                        <span className="text-[11px] ml-2" style={{ color: 'var(--color-text-subtle)' }}>
+                          x {item.quantity}
                         </span>
                       </div>
-                      <span className="font-medium" style={{ color: 'var(--color-text)' }}>
+                      <span className="font-normal" style={{ color: 'var(--color-text)' }}>
                         {formatPrice(item.price * item.quantity, order.currency)}
                       </span>
                     </li>
@@ -229,34 +234,29 @@ export function OrderLookupPage() {
               </div>
             )}
 
-            {/* Total */}
-            <div
-              className="px-6 py-4 border-t"
-              style={{ borderColor: 'var(--color-border)' }}
-            >
+            <div className="px-6 py-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
+                <span className="text-[12px] font-normal" style={{ color: 'var(--color-text)' }}>
                   Totaalbedrag
                 </span>
-                <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>
+                <span className="text-base font-normal" style={{ color: 'var(--color-text)' }}>
                   {formatPrice(order.total_price, order.currency)}
                 </span>
               </div>
             </div>
 
-            {/* Shipping address */}
             {order.shipping_address && (
               <div
                 className="px-6 py-4 border-t"
                 style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg-secondary)' }}
               >
                 <p
-                  className="text-xs font-semibold uppercase tracking-wide mb-2"
+                  className="text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   Bezorgadres
                 </p>
-                <p className="text-sm" style={{ color: 'var(--color-text)' }}>
+                <p className="text-[13px] font-extralight leading-relaxed" style={{ color: 'var(--color-text)' }}>
                   {order.shipping_address.name ?? order.shipping_address.first_name}
                   <br />
                   {order.shipping_address.address1}

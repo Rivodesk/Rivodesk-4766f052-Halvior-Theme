@@ -9,55 +9,48 @@ export function Footer({ shopName }: FooterProps) {
 
   return (
     <footer
-      className="mt-20 border-t"
-      style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg-secondary)' }}
+      className="mt-0 border-t"
+      style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
     >
       <div
-        className="mx-auto px-4 sm:px-6 lg:px-8 py-12"
+        className="mx-auto px-6 lg:px-16 py-16"
         style={{ maxWidth: 'var(--container-max)' }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
             <p
-              className="font-bold text-lg mb-2"
-              style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-heading)' }}
+              className="text-base font-medium tracking-[0.2em] uppercase mb-3"
+              style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
             >
               {shopName}
             </p>
-            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-              Powered by{' '}
-              <a
-                href="https://rivodesk.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:opacity-80 transition-opacity"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                Rivodesk
-              </a>
+            <p
+              className="text-[13px] font-extralight"
+              style={{ color: 'var(--color-text-muted)' }}
+            >
+              Built to outlast.
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Shop */}
           <div>
             <p
-              className="text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: 'var(--color-text-muted)' }}
+              className="text-[10px] font-normal uppercase tracking-[0.2em] mb-5"
+              style={{ color: 'var(--color-text)' }}
             >
-              Navigatie
+              Shop
             </p>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {[
-                { href: '/', label: 'Home' },
-                { href: '/products', label: 'Producten' },
-                { href: '/orders', label: 'Bestellingen' },
-                { href: '/checkout', label: 'Afrekenen' },
+                { href: '/products', label: 'Alle producten' },
+                { href: '/products', label: 'Essentials' },
+                { href: '/products', label: 'Nieuwe drops' },
               ].map(link => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm transition-colors hover:opacity-80"
+                    className="text-[13px] font-extralight transition-opacity hover:opacity-70"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
                     {link.label}
@@ -70,21 +63,21 @@ export function Footer({ shopName }: FooterProps) {
           {/* Info */}
           <div>
             <p
-              className="text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: 'var(--color-text-muted)' }}
+              className="text-[10px] font-normal uppercase tracking-[0.2em] mb-5"
+              style={{ color: 'var(--color-text)' }}
             >
-              Informatie
+              Info
             </p>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {[
-                { href: '/privacy', label: 'Privacybeleid' },
-                { href: '/terms', label: 'Algemene voorwaarden' },
+                { href: '/orders', label: 'Bestelling volgen' },
+                { href: '/checkout', label: 'Afrekenen' },
                 { href: '/returns', label: 'Retourneren' },
               ].map(link => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm transition-colors hover:opacity-80"
+                    className="text-[13px] font-extralight transition-opacity hover:opacity-70"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
                     {link.label}
@@ -93,13 +86,52 @@ export function Footer({ shopName }: FooterProps) {
               ))}
             </ul>
           </div>
+
+          {/* Connect */}
+          <div>
+            <p
+              className="text-[10px] font-normal uppercase tracking-[0.2em] mb-5"
+              style={{ color: 'var(--color-text)' }}
+            >
+              Connect
+            </p>
+            <ul className="space-y-3">
+              {[
+                { href: 'https://instagram.com', label: 'Instagram' },
+                { href: 'mailto:hello@halvior.com', label: 'Contact' },
+              ].map(link => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[13px] font-extralight transition-opacity hover:opacity-70"
+                    style={{ color: 'var(--color-text-muted)' }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div
-          className="mt-10 pt-6 border-t text-center text-xs"
-          style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+          className="mt-12 pt-6 border-t flex flex-col sm:flex-row justify-between items-center gap-2"
+          style={{ borderColor: 'var(--color-border)' }}
         >
-          © {year} {shopName}. Alle rechten voorbehouden.
+          <span
+            className="text-[9px] font-normal uppercase tracking-[0.15em]"
+            style={{ color: 'var(--color-text-subtle)' }}
+          >
+            &copy; {year} {shopName}. Alle rechten voorbehouden.
+          </span>
+          <span
+            className="text-[9px] font-normal uppercase tracking-[0.15em]"
+            style={{ color: 'var(--color-text-subtle)' }}
+          >
+            Privacy &nbsp;&nbsp; Voorwaarden &nbsp;&nbsp; Cookies
+          </span>
         </div>
       </div>
     </footer>

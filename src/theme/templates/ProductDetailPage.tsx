@@ -28,7 +28,6 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
 
-  // Find matching variant
   const selectedVariant: ProductVariant | null =
     product.variants?.find(v => {
       if (!v.options || Object.keys(v.options).length === 0) return true;
@@ -61,28 +60,27 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
   return (
     <div
-      className="mx-auto px-4 sm:px-6 lg:px-8 py-10"
+      className="mx-auto px-6 lg:px-16 py-10"
       style={{ maxWidth: 'var(--container-max)' }}
     >
       {/* Breadcrumb */}
-      <nav className="mb-6">
+      <nav className="mb-8">
         <Link
           href="/products"
-          className="inline-flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
-          style={{ color: 'var(--color-text-muted)' }}
+          className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.12em] transition-opacity hover:opacity-70"
+          style={{ color: 'var(--color-text-subtle)' }}
         >
-          <ChevronLeft className="h-4 w-4" />
-          Terug naar producten
+          <ChevronLeft className="h-3.5 w-3.5" />
+          Terug naar collectie
         </Link>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         {/* Image gallery */}
         <div className="space-y-3">
-          {/* Main image */}
           <div
-            className="relative aspect-square rounded-2xl overflow-hidden"
-            style={{ backgroundColor: 'var(--color-bg-secondary)' }}
+            className="relative aspect-square overflow-hidden"
+            style={{ backgroundColor: 'var(--color-bg-elevated)' }}
           >
             {primaryImage ? (
               <Image
@@ -95,37 +93,35 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
-                <ShoppingBag
-                  className="h-20 w-20 opacity-20"
-                  style={{ color: 'var(--color-text-muted)' }}
-                />
+                <span className="text-[120px] font-thin opacity-[0.03]" style={{ color: 'var(--color-text)' }}>
+                  H
+                </span>
               </div>
             )}
             {!isAvailable && (
-              <div className="absolute top-3 left-3">
+              <div className="absolute top-4 left-4">
                 <span
-                  className="text-xs font-semibold text-white px-3 py-1.5 rounded-full"
-                  style={{ backgroundColor: 'var(--color-text-muted)' }}
+                  className="text-[10px] font-normal uppercase tracking-[0.15em] px-3 py-1.5"
+                  style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text-muted)' }}
                 >
-                  Uitverkocht
+                  Archived
                 </span>
               </div>
             )}
           </div>
 
-          {/* Thumbnails */}
           {sortedImages.length > 1 && (
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-5 gap-3">
               {sortedImages.map((img, i) => (
                 <button
                   key={img.id}
                   onClick={() => setActiveImageIndex(i)}
-                  className="relative aspect-square rounded-lg overflow-hidden transition-all"
+                  className="relative aspect-square overflow-hidden transition-all"
                   style={{
-                    backgroundColor: 'var(--color-bg-secondary)',
-                    outline: activeImageIndex === i ? `2px solid var(--color-primary)` : 'none',
+                    backgroundColor: 'var(--color-bg-elevated)',
+                    outline: activeImageIndex === i ? '1px solid rgba(242,237,232,0.3)' : 'none',
                     outlineOffset: '2px',
-                    opacity: activeImageIndex === i ? 1 : 0.7,
+                    opacity: activeImageIndex === i ? 1 : 0.6,
                   }}
                 >
                   <Image
@@ -143,58 +139,43 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
         {/* Product info */}
         <div className="flex flex-col">
-          {product.vendor && (
-            <p className="text-sm font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-              {product.vendor}
-            </p>
-          )}
-
           <h1
-            className="text-3xl font-bold mb-4 leading-tight"
+            className="text-2xl font-light tracking-[0.08em] uppercase mb-5 leading-tight"
             style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
           >
             {product.title}
           </h1>
 
           {/* Price */}
-          <div className="flex items-baseline gap-3 mb-6">
+          <div className="flex items-baseline gap-3 mb-8">
             <span
-              className="text-2xl font-bold"
+              className="text-xl font-normal tracking-wide"
               style={{ color: 'var(--color-text)' }}
             >
               {formatPrice(price)}
             </span>
             {compareAtPrice && compareAtPrice > price && (
               <span
-                className="text-base line-through"
-                style={{ color: 'var(--color-text-muted)' }}
+                className="text-sm line-through"
+                style={{ color: 'var(--color-text-subtle)' }}
               >
                 {formatPrice(compareAtPrice)}
-              </span>
-            )}
-            {compareAtPrice && compareAtPrice > price && (
-              <span
-                className="text-xs font-bold text-white px-2 py-1 rounded-md"
-                style={{ backgroundColor: 'var(--color-accent)' }}
-              >
-                -{Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}%
               </span>
             )}
           </div>
 
           {/* Options */}
           {sortedOptions.map(option => (
-            <div key={option.id} className="mb-5">
-              <p
-                className="text-xs font-semibold uppercase tracking-wider mb-2"
-                style={{ color: 'var(--color-text)' }}
-              >
-                {option.name}:{' '}
-                <span className="normal-case font-normal" style={{ color: 'var(--color-text-muted)' }}>
-                  {selectedOptions[option.name]}
-                </span>
-              </p>
-              <div className="flex flex-wrap gap-2">
+            <div key={option.id} className="mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <p
+                  className="text-[10px] font-normal uppercase tracking-[0.18em]"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {option.name} — {selectedOptions[option.name]}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2.5">
                 {option.values.map(val => {
                   const isSelected = selectedOptions[option.name] === val;
                   return (
@@ -203,11 +184,11 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                       onClick={() =>
                         setSelectedOptions(prev => ({ ...prev, [option.name]: val }))
                       }
-                      className="px-4 py-2 rounded-lg text-sm font-medium border transition-all"
+                      className="px-5 py-2.5 text-[12px] font-normal tracking-[0.1em] border transition-all"
                       style={{
-                        borderColor: isSelected ? 'var(--color-primary)' : 'var(--color-border)',
-                        backgroundColor: isSelected ? 'var(--color-primary)' : 'var(--color-bg)',
-                        color: isSelected ? '#fff' : 'var(--color-text)',
+                        borderColor: isSelected ? 'var(--color-text)' : 'var(--color-border)',
+                        backgroundColor: isSelected ? 'var(--color-text)' : 'transparent',
+                        color: isSelected ? 'var(--color-bg)' : 'var(--color-text)',
                       }}
                     >
                       {val}
@@ -219,33 +200,33 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
           ))}
 
           {/* Qty selector */}
-          <div className="mb-5">
+          <div className="mb-6">
             <p
-              className="text-xs font-semibold uppercase tracking-wider mb-2"
-              style={{ color: 'var(--color-text)' }}
+              className="text-[10px] font-normal uppercase tracking-[0.18em] mb-3"
+              style={{ color: 'var(--color-text-muted)' }}
             >
               Aantal
             </p>
             <div
-              className="inline-flex items-center border rounded-lg overflow-hidden"
+              className="inline-flex items-center border"
               style={{ borderColor: 'var(--color-border)' }}
             >
               <button
                 onClick={() => setQty(q => Math.max(1, q - 1))}
-                className="p-3 hover:bg-gray-100 transition-colors"
+                className="p-3 transition-opacity hover:opacity-70"
                 aria-label="Minder"
               >
                 <Minus className="h-4 w-4" style={{ color: 'var(--color-text)' }} />
               </button>
               <span
-                className="px-5 text-sm font-semibold"
+                className="px-5 text-sm font-normal"
                 style={{ color: 'var(--color-text)' }}
               >
                 {qty}
               </span>
               <button
                 onClick={() => setQty(q => q + 1)}
-                className="p-3 hover:bg-gray-100 transition-colors"
+                className="p-3 transition-opacity hover:opacity-70"
                 aria-label="Meer"
               >
                 <Plus className="h-4 w-4" style={{ color: 'var(--color-text)' }} />
@@ -257,16 +238,46 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
           <button
             onClick={handleAddToCart}
             disabled={!isAvailable}
-            className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed mb-3"
-            style={{ backgroundColor: isAvailable ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
+            className="w-full flex items-center justify-center gap-2 py-4 px-6 text-[12px] font-medium uppercase tracking-[0.15em] transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed mb-4"
+            style={{
+              backgroundColor: isAvailable ? 'var(--color-text)' : 'var(--color-bg-elevated)',
+              color: isAvailable ? 'var(--color-bg)' : 'var(--color-text-subtle)',
+            }}
           >
             <ShoppingBag className="h-4 w-4" />
             {!isAvailable
-              ? 'Uitverkocht'
+              ? 'Archived'
               : added
-              ? 'Toegevoegd!'
-              : 'In winkelwagen'}
+              ? 'Toegevoegd'
+              : `In winkelwagen — ${formatPrice(price)}`}
           </button>
+
+          <p
+            className="text-[11px] font-extralight text-center"
+            style={{ color: 'var(--color-text-subtle)' }}
+          >
+            Gratis verzending vanaf €200 &middot; 14 dagen retour
+          </p>
+
+          {/* Description */}
+          {product.description && (
+            <div
+              className="mt-10 pt-8 border-t"
+              style={{ borderColor: 'var(--color-border)' }}
+            >
+              <h3
+                className="text-[10px] font-normal uppercase tracking-[0.2em] mb-4"
+                style={{ color: 'var(--color-text)' }}
+              >
+                Beschrijving
+              </h3>
+              <div
+                className="text-[13px] font-extralight leading-relaxed prose prose-sm max-w-none"
+                style={{ color: 'var(--color-text-muted)' }}
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            </div>
+          )}
 
           {/* Tags */}
           {product.tags && product.tags.length > 0 && (
@@ -274,36 +285,15 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
               {product.tags.map(tag => (
                 <span
                   key={tag}
-                  className="text-xs px-2.5 py-1 rounded-full border"
+                  className="text-[10px] uppercase tracking-[0.1em] px-2.5 py-1 border"
                   style={{
                     borderColor: 'var(--color-border)',
-                    color: 'var(--color-text-muted)',
-                    backgroundColor: 'var(--color-bg-secondary)',
+                    color: 'var(--color-text-subtle)',
                   }}
                 >
                   {tag}
                 </span>
               ))}
-            </div>
-          )}
-
-          {/* Description */}
-          {product.description && (
-            <div
-              className="mt-8 pt-8 border-t"
-              style={{ borderColor: 'var(--color-border)' }}
-            >
-              <h3
-                className="text-sm font-semibold uppercase tracking-wider mb-3"
-                style={{ color: 'var(--color-text)' }}
-              >
-                Beschrijving
-              </h3>
-              <div
-                className="text-sm leading-relaxed prose prose-sm max-w-none"
-                style={{ color: 'var(--color-text-muted)' }}
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
             </div>
           )}
         </div>
