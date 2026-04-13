@@ -5,13 +5,13 @@ import { Search, Package, Loader2 } from 'lucide-react';
 import { Order, formatPrice } from '@/lib/rivodesk';
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  paid: { label: 'Betaald', color: '#F2EDE8' },
-  pending: { label: 'In afwachting', color: '#B8A692' },
-  refunded: { label: 'Terugbetaald', color: '#dc2626' },
-  voided: { label: 'Geannuleerd', color: '#5C5C48' },
-  fulfilled: { label: 'Verzonden', color: '#F2EDE8' },
-  unfulfilled: { label: 'Nog niet verzonden', color: '#B8A692' },
-  partial: { label: 'Gedeeltelijk verzonden', color: '#B8A692' },
+  paid: { label: 'Paid', color: '#F2EDE8' },
+  pending: { label: 'Pending', color: '#B8A692' },
+  refunded: { label: 'Refunded', color: '#dc2626' },
+  voided: { label: 'Cancelled', color: '#5C5C48' },
+  fulfilled: { label: 'Shipped', color: '#F2EDE8' },
+  unfulfilled: { label: 'Not yet shipped', color: '#B8A692' },
+  partial: { label: 'Partially shipped', color: '#B8A692' },
 };
 
 function statusBadge(status: string | null) {
@@ -46,7 +46,7 @@ export function OrderLookupPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error ?? 'Bestelling niet gevonden.');
+        throw new Error(data.error ?? 'Order not found.');
       }
       setOrder(data);
     } catch (err: any) {
@@ -71,19 +71,19 @@ export function OrderLookupPage() {
             className="text-[11px] font-normal uppercase tracking-[0.25em] mb-4"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            Bestellingen
+            Orders
           </p>
           <h1
             className="text-2xl font-light tracking-wide mb-3"
             style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
           >
-            Bestelling volgen
+            Track order
           </h1>
           <p
             className="text-[13px] font-extralight"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            Voer je bestelnummer en e-mailadres in om de status te bekijken.
+            Enter your order number and email to check the status.
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export function OrderLookupPage() {
               className="block text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              Bestelnummer
+              Order number
             </label>
             <input
               type="text"
@@ -111,7 +111,7 @@ export function OrderLookupPage() {
                 color: 'var(--color-text)',
                 backgroundColor: 'transparent',
               }}
-              placeholder="bijv. 1001"
+              placeholder="e.g. 1001"
             />
           </div>
           <div>
@@ -119,7 +119,7 @@ export function OrderLookupPage() {
               className="block text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              E-mailadres
+              Email address
             </label>
             <input
               type="email"
@@ -132,7 +132,7 @@ export function OrderLookupPage() {
                 color: 'var(--color-text)',
                 backgroundColor: 'transparent',
               }}
-              placeholder="je@email.nl"
+              placeholder="you@email.com"
             />
           </div>
           <button
@@ -144,12 +144,12 @@ export function OrderLookupPage() {
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Zoeken
+                Searching
               </>
             ) : (
               <>
                 <Search className="h-4 w-4" />
-                Zoek bestelling
+                Find order
               </>
             )}
           </button>
@@ -180,7 +180,7 @@ export function OrderLookupPage() {
                     className="text-[10px] font-normal uppercase tracking-[0.18em]"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    Bestelling
+                    Order
                   </p>
                   <p
                     className="text-lg font-light tracking-wide"
@@ -209,7 +209,7 @@ export function OrderLookupPage() {
                   className="text-[10px] font-normal uppercase tracking-[0.18em] mb-4"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
-                  Producten
+                  Products
                 </p>
                 <ul className="space-y-3">
                   {order.line_items.map((item: any, i: number) => (
@@ -237,7 +237,7 @@ export function OrderLookupPage() {
             <div className="px-6 py-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
               <div className="flex justify-between items-center">
                 <span className="text-[12px] font-normal" style={{ color: 'var(--color-text)' }}>
-                  Totaalbedrag
+                  Total amount
                 </span>
                 <span className="text-base font-normal" style={{ color: 'var(--color-text)' }}>
                   {formatPrice(order.total_price, order.currency)}
@@ -254,7 +254,7 @@ export function OrderLookupPage() {
                   className="text-[10px] font-normal uppercase tracking-[0.18em] mb-2"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
-                  Bezorgadres
+                  Shipping address
                 </p>
                 <p className="text-[13px] font-extralight leading-relaxed" style={{ color: 'var(--color-text)' }}>
                   {order.shipping_address.name ?? order.shipping_address.first_name}

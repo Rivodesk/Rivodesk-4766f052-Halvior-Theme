@@ -58,7 +58,7 @@ export function CartDrawer() {
                   className="text-[11px] font-normal uppercase tracking-[0.18em]"
                   style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
                 >
-                  Winkelwagen
+                  Cart
                 </h2>
                 {totalItems > 0 && (
                   <span
@@ -72,7 +72,7 @@ export function CartDrawer() {
               <button
                 onClick={closeDrawer}
                 className="p-2 transition-opacity hover:opacity-70"
-                aria-label="Sluiten"
+                aria-label="Close"
               >
                 <X className="h-5 w-5" style={{ color: 'var(--color-text)' }} />
               </button>
@@ -90,14 +90,14 @@ export function CartDrawer() {
                     className="text-sm font-light"
                     style={{ color: 'var(--color-text)' }}
                   >
-                    Je winkelwagen is leeg
+                    Your cart is empty
                   </p>
                   <button
                     onClick={closeDrawer}
                     className="text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-70"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    Verder winkelen
+                    Continue shopping
                   </button>
                 </div>
               ) : (
@@ -157,7 +157,7 @@ export function CartDrawer() {
                             <button
                               onClick={() => updateQty(item.variantId, item.quantity - 1)}
                               className="p-1.5 transition-opacity hover:opacity-70"
-                              aria-label="Minder"
+                              aria-label="Less"
                             >
                               <Minus className="h-3 w-3" style={{ color: 'var(--color-text)' }} />
                             </button>
@@ -170,7 +170,7 @@ export function CartDrawer() {
                             <button
                               onClick={() => updateQty(item.variantId, item.quantity + 1)}
                               className="p-1.5 transition-opacity hover:opacity-70"
-                              aria-label="Meer"
+                              aria-label="More"
                             >
                               <Plus className="h-3 w-3" style={{ color: 'var(--color-text)' }} />
                             </button>
@@ -178,7 +178,7 @@ export function CartDrawer() {
                           <button
                             onClick={() => removeItem(item.variantId)}
                             className="p-1.5 transition-opacity hover:opacity-70"
-                            aria-label="Verwijderen"
+                            aria-label="Remove"
                           >
                             <Trash2 className="h-3.5 w-3.5" style={{ color: 'var(--color-text-subtle)' }} />
                           </button>
@@ -201,7 +201,7 @@ export function CartDrawer() {
                     className="text-[11px] font-normal uppercase tracking-[0.15em]"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    Subtotaal
+                    Subtotal
                   </span>
                   <span
                     className="text-base font-normal"
@@ -216,14 +216,14 @@ export function CartDrawer() {
                   className="block w-full text-center py-4 px-6 text-[11px] font-medium uppercase tracking-[0.15em] transition-opacity hover:opacity-90 active:scale-[0.98]"
                   style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
                 >
-                  Afrekenen
+                  Checkout
                 </Link>
                 <button
                   onClick={closeDrawer}
                   className="block w-full text-center mt-3 py-2 text-[11px] font-normal uppercase tracking-[0.12em] transition-opacity hover:opacity-70"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
-                  Verder winkelen
+                  Continue shopping
                 </button>
               </div>
             )}

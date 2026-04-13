@@ -225,7 +225,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                 className="text-[10px] font-normal uppercase tracking-[0.18em] mb-3"
                 style={{ color: 'var(--color-text-muted)' }}
               >
-                Aantal
+                Quantity
               </p>
               <div
                 className="inline-flex items-center border"
@@ -234,7 +234,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                 <button
                   onClick={() => setQty(q => Math.max(1, q - 1))}
                   className="p-3 transition-opacity hover:opacity-70"
-                  aria-label="Minder"
+                  aria-label="Less"
                 >
                   <Minus className="h-4 w-4" style={{ color: 'var(--color-text)' }} />
                 </button>
@@ -247,7 +247,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                 <button
                   onClick={() => setQty(q => q + 1)}
                   className="p-3 transition-opacity hover:opacity-70"
-                  aria-label="Meer"
+                  aria-label="More"
                 >
                   <Plus className="h-4 w-4" style={{ color: 'var(--color-text)' }} />
                 </button>
@@ -268,7 +268,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
               {!isAvailable
                 ? 'Archived'
                 : added
-                ? 'Toegevoegd'
+                ? 'Added'
                 : `Add to cart — ${formatPrice(price)}`}
             </button>
 

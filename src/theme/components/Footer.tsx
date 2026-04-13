@@ -6,6 +6,7 @@ interface FooterProps {
 
 export function Footer({ shopName }: FooterProps) {
   const year = new Date().getFullYear();
+  const brand = shopName === 'Mijn Winkel' ? 'HALVIOR' : shopName.toUpperCase();
 
   return (
     <footer
@@ -23,7 +24,7 @@ export function Footer({ shopName }: FooterProps) {
               className="text-base font-medium tracking-[0.2em] uppercase mb-3"
               style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
             >
-              {shopName}
+              {brand}
             </p>
             <p
               className="text-[13px] font-extralight"
@@ -43,9 +44,10 @@ export function Footer({ shopName }: FooterProps) {
             </p>
             <ul className="space-y-3">
               {[
-                { href: '/products', label: 'Alle producten' },
+                { href: '/products', label: 'All products' },
                 { href: '/products', label: 'Essentials' },
-                { href: '/products', label: 'Nieuwe drops' },
+                { href: '/products', label: 'New drops' },
+                { href: '/products', label: 'Archive' },
               ].map(link => (
                 <li key={link.label}>
                   <Link
@@ -70,9 +72,10 @@ export function Footer({ shopName }: FooterProps) {
             </p>
             <ul className="space-y-3">
               {[
-                { href: '/orders', label: 'Bestelling volgen' },
-                { href: '/checkout', label: 'Afrekenen' },
-                { href: '/returns', label: 'Retourneren' },
+                { href: '/about', label: 'About' },
+                { href: '/orders', label: 'Track order' },
+                { href: '/checkout', label: 'Checkout' },
+                { href: '#', label: 'Size guide' },
               ].map(link => (
                 <li key={link.label}>
                   <Link
@@ -98,13 +101,12 @@ export function Footer({ shopName }: FooterProps) {
             <ul className="space-y-3">
               {[
                 { href: 'https://instagram.com', label: 'Instagram' },
-                { href: 'mailto:hello@halvior.com', label: 'Contact' },
+                { href: '#', label: 'The Index' },
+                { href: '/about', label: 'Contact' },
               ].map(link => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-[13px] font-extralight transition-opacity hover:opacity-70"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
@@ -124,13 +126,13 @@ export function Footer({ shopName }: FooterProps) {
             className="text-[9px] font-normal uppercase tracking-[0.15em]"
             style={{ color: 'var(--color-text-subtle)' }}
           >
-            &copy; {year} {shopName}. Alle rechten voorbehouden.
+            &copy; {year} {brand}. All rights reserved.
           </span>
           <span
             className="text-[9px] font-normal uppercase tracking-[0.15em]"
             style={{ color: 'var(--color-text-subtle)' }}
           >
-            Privacy &nbsp;&nbsp; Voorwaarden &nbsp;&nbsp; Cookies
+            Privacy &nbsp;&nbsp; Terms &nbsp;&nbsp; Cookies
           </span>
         </div>
       </div>

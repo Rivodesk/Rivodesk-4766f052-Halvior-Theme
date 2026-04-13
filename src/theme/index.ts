@@ -10,3 +10,4 @@ export { ProductsPage } from './templates/ProductsPage';
 export { ProductDetailPage } from './templates/ProductDetailPage';
 export { OrderLookupPage } from './templates/OrderLookupPage';
 export { CheckoutPage } from './templates/CheckoutPage';
+export { AboutPage } from './templates/AboutPage';

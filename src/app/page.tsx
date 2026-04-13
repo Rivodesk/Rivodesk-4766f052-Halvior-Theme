@@ -14,5 +14,5 @@ async function getProducts() {
 
 export default async function Page() {
   const products = await getProducts();
-  return <HomePage products={products} shopName="Mijn Winkel" />;
+  return <HomePage products={products} shopName="Halvior" />;
 }

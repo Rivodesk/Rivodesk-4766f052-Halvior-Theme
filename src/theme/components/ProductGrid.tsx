@@ -50,7 +50,7 @@ export function ProductGrid({ products, title, loading = false }: ProductGridPro
             className="text-sm font-extralight"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            Geen producten gevonden.
+            No products found.
           </p>
         </div>
       ) : (

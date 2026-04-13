@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Search, User, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from './CartContext';
@@ -9,12 +9,12 @@ import { useCart } from './CartContext';
 const leftLinks = [
   { href: '/products', label: 'Shop' },
   { href: '/products', label: 'Collection' },
-  { href: '/orders', label: 'About' },
+  { href: '/about', label: 'About' },
 ];
 
 const rightLinks = [
-  { href: '#', label: 'Search', icon: Search },
-  { href: '#', label: 'Account', icon: User },
+  { href: '#', label: 'Search' },
+  { href: '#', label: 'Account' },
 ];
 
 interface HeaderProps {
@@ -26,6 +26,7 @@ interface HeaderProps {
 export function Header({ shopName }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { totalItems, openDrawer } = useCart();
+  const brand = shopName === 'Mijn Winkel' ? 'HALVIOR' : shopName.toUpperCase();
 
   return (
     <>
@@ -68,12 +69,11 @@ export function Header({ shopName }: HeaderProps) {
             className="absolute left-1/2 -translate-x-1/2 text-[22px] font-semibold tracking-[0.28em] uppercase transition-opacity hover:opacity-80"
             style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
           >
-            {shopName}
+            {brand}
           </Link>
 
           {/* Right actions */}
           <div className="flex items-center gap-6 ml-auto">
-            {/* Desktop right links */}
             {rightLinks.map(link => (
               <Link
                 key={link.label}
@@ -89,7 +89,7 @@ export function Header({ shopName }: HeaderProps) {
             <button
               onClick={openDrawer}
               className="relative flex items-center gap-1.5 transition-opacity hover:opacity-70"
-              aria-label="Winkelwagen openen"
+              aria-label="Open cart"
             >
               <span
                 className="hidden md:inline text-[11px] font-normal uppercase tracking-[0.12em]"

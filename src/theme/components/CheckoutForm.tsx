@@ -46,14 +46,14 @@ function StripePaymentForm({ clientSecret, customerName, onDone }: StripePayment
       confirmParams: {
         return_url: `${window.location.origin}/orders?status=success`,
         payment_method_data: {
-          billing_details: { name: customerName || 'Klant' },
+          billing_details: { name: customerName || 'Customer' },
         },
       },
       redirect: 'if_required',
     });
 
     if (stripeError) {
-      setError(stripeError.message ?? 'Betaling mislukt. Probeer opnieuw.');
+      setError(stripeError.message ?? 'Payment failed. Please try again.');
       setLoading(false);
     } else {
       onDone();
@@ -75,11 +75,11 @@ function StripePaymentForm({ clientSecret, customerName, onDone }: StripePayment
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            Verwerken…
+            Processing
           </>
         ) : (
           <>
-            Betaal nu
+            Pay now
             <ArrowRight className="h-4 w-4" />
           </>
         )}
@@ -177,10 +177,10 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
           className="text-2xl font-bold"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
-          Bestelling geplaatst!
+          Order placed
         </h2>
         <p className="text-sm max-w-sm" style={{ color: 'var(--color-text-muted)' }}>
-          Bedankt voor je bestelling. Je ontvangt een bevestiging op {customer.email}.
+          Thank you for your order. You will receive a confirmation at {customer.email}.
         </p>
       </div>
     );
@@ -214,7 +214,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                   color: step === s ? 'var(--color-text)' : 'var(--color-text-muted)',
                 }}
               >
-                {s === 'info' ? 'Gegevens' : 'Betaling'}
+                {s === 'info' ? 'Details' : 'Payment'}
               </span>
             </div>
           </div>
@@ -229,7 +229,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 className="block text-xs font-medium mb-1"
                 style={{ color: 'var(--color-text)' }}
               >
-                Volledige naam
+                Full name
               </label>
               <input
                 type="text"
@@ -237,7 +237,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 onChange={e => setCustomer(p => ({ ...p, name: e.target.value }))}
                 className={fieldClass}
                 style={fieldStyle}
-                placeholder="Jan de Vries"
+                placeholder="John Smith"
               />
             </div>
             <div>
@@ -245,7 +245,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 className="block text-xs font-medium mb-1"
                 style={{ color: 'var(--color-text)' }}
               >
-                E-mailadres *
+                Email address *
               </label>
               <input
                 type="email"
@@ -254,7 +254,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 onChange={e => setCustomer(p => ({ ...p, email: e.target.value }))}
                 className={fieldClass}
                 style={fieldStyle}
-                placeholder="jan@voorbeeld.nl"
+                placeholder="you@email.com"
               />
             </div>
             <div>
@@ -262,7 +262,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 className="block text-xs font-medium mb-1"
                 style={{ color: 'var(--color-text)' }}
               >
-                Straat en huisnummer *
+                Street and number *
               </label>
               <input
                 type="text"
@@ -271,7 +271,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 onChange={e => setCustomer(p => ({ ...p, address: e.target.value }))}
                 className={fieldClass}
                 style={fieldStyle}
-                placeholder="Hoofdstraat 1"
+                placeholder="123 Main Street"
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -280,7 +280,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                   className="block text-xs font-medium mb-1"
                   style={{ color: 'var(--color-text)' }}
                 >
-                  Postcode *
+                  Postal code *
                 </label>
                 <input
                   type="text"
@@ -297,7 +297,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                   className="block text-xs font-medium mb-1"
                   style={{ color: 'var(--color-text)' }}
                 >
-                  Stad *
+                  City *
                 </label>
                 <input
                   type="text"
@@ -315,7 +315,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 className="block text-xs font-medium mb-1"
                 style={{ color: 'var(--color-text)' }}
               >
-                Land *
+                Country *
               </label>
               <select
                 required
@@ -324,11 +324,11 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
                 className={fieldClass}
                 style={fieldStyle}
               >
-                <option value="NL">Nederland</option>
-                <option value="BE">België</option>
-                <option value="DE">Duitsland</option>
-                <option value="FR">Frankrijk</option>
-                <option value="GB">Verenigd Koninkrijk</option>
+                <option value="NL">Netherlands</option>
+                <option value="BE">Belgium</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="GB">United Kingdom</option>
               </select>
             </div>
           </div>
@@ -343,7 +343,7 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
               style={{ borderColor: 'var(--color-border)' }}
             >
               <span className="text-sm font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                Totaal te betalen
+                Total to pay
               </span>
               <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>
                 {formatPrice(totalPrice)}
@@ -358,11 +358,11 @@ export function CheckoutForm({ onDone }: CheckoutFormProps) {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Even geduld…
+                  Please wait
                 </>
               ) : (
                 <>
-                  Doorgaan naar betaling
+                  Continue to payment
                   <ArrowRight className="h-4 w-4" />
                 </>
               )}

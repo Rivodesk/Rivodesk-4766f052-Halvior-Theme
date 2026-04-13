@@ -11,10 +11,10 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Mijn Winkel',
-    template: '%s | Mijn Winkel',
+    default: 'Halvior',
+    template: '%s | Halvior',
   },
-  description: 'Welkom in onze winkel.',
+  description: 'Built to outlast. Belgian discipline. Uncompromising craft.',
 };
 
 export default function RootLayout({
@@ -23,13 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <body>
         <CartProvider>
-          <Header shopName="Mijn Winkel" />
+          <Header shopName="Halvior" />
           <CartDrawer />
           <main>{children}</main>
-          <Footer shopName="Mijn Winkel" />
+          <Footer shopName="Halvior" />
         </CartProvider>
       </body>
     </html>

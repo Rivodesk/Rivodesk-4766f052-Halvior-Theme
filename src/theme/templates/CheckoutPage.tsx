@@ -32,20 +32,20 @@ export function CheckoutPage() {
           className="text-xl font-light tracking-wide mb-3"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
-          Je winkelwagen is leeg
+          Your cart is empty
         </h1>
         <p
           className="text-[13px] font-extralight mb-8"
           style={{ color: 'var(--color-text-muted)' }}
         >
-          Voeg producten toe om verder te gaan met afrekenen.
+          Add products to continue with checkout.
         </p>
         <a
           href="/products"
           className="inline-flex items-center gap-2 px-8 py-4 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-90"
           style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
         >
-          Bekijk collectie
+          View collection
         </a>
       </div>
     );
@@ -61,14 +61,14 @@ export function CheckoutPage() {
           className="text-xl font-light tracking-wide"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
         >
-          Afrekenen
+          Checkout
         </h1>
         <span
           className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.1em] px-2 py-0.5 border"
           style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-subtle)' }}
         >
           <Lock className="h-3 w-3" />
-          Beveiligd
+          Secured
         </span>
       </div>
 
@@ -88,7 +88,7 @@ export function CheckoutPage() {
               className="text-[11px] font-normal uppercase tracking-[0.18em] mb-6"
               style={{ color: 'var(--color-text)', fontFamily: 'var(--font-heading)' }}
             >
-              Besteloverzicht
+              Order summary
             </h2>
 
             <ul className="space-y-4 mb-5">
@@ -148,18 +148,18 @@ export function CheckoutPage() {
               style={{ borderColor: 'var(--color-border)' }}
             >
               <div className="flex justify-between text-[12px]">
-                <span style={{ color: 'var(--color-text-muted)' }}>Subtotaal</span>
+                <span style={{ color: 'var(--color-text-muted)' }}>Subtotal</span>
                 <span style={{ color: 'var(--color-text)' }}>{formatPrice(totalPrice)}</span>
               </div>
               <div className="flex justify-between text-[12px]">
-                <span style={{ color: 'var(--color-text-muted)' }}>Verzending</span>
-                <span style={{ color: 'var(--color-text-muted)' }}>Gratis</span>
+                <span style={{ color: 'var(--color-text-muted)' }}>Shipping</span>
+                <span style={{ color: 'var(--color-text-muted)' }}>Free</span>
               </div>
               <div
                 className="flex justify-between font-normal text-base pt-3 border-t"
                 style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
               >
-                <span>Totaal</span>
+                <span>Total</span>
                 <span>{formatPrice(totalPrice)}</span>
               </div>
             </div>

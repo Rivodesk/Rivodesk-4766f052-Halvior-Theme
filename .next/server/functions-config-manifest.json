@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/api/products/[handle]":{},"/api/orders":{},"/api/products":{},"/api/checkout":{},"/api/shop":{},"/orders":{},"/checkout":{},"/":{},"/products":{}}}
+{"version":1,"functions":{"/api/products/[handle]":{},"/api/orders":{},"/api/checkout":{},"/api/shop":{},"/api/products":{},"/checkout":{},"/orders":{},"/":{},"/products":{}}}
