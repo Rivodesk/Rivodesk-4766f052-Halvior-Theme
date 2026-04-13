@@ -1,15 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from './CartContext';
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/products', label: 'Collectie' },
-  { href: '/orders', label: 'Bestellingen' },
+const leftLinks = [
+  { href: '/products', label: 'Shop' },
+  { href: '/products', label: 'Collection' },
+  { href: '/orders', label: 'About' },
+];
+
+const rightLinks = [
+  { href: '#', label: 'Search', icon: Search },
+  { href: '#', label: 'Account', icon: User },
 ];
 
 interface HeaderProps {
@@ -26,10 +31,10 @@ export function Header({ shopName }: HeaderProps) {
     <>
       {/* Announcement bar */}
       <div
-        className="text-center py-2.5 text-[9px] font-normal uppercase tracking-[0.15em]"
+        className="text-center py-2 text-[9px] font-normal uppercase tracking-[0.15em]"
         style={{ backgroundColor: 'var(--color-bg-secondary)', color: 'var(--color-text-muted)' }}
       >
-        Gratis verzending vanaf €200 — Limited drops
+        Free shipping on all orders over €200 &nbsp;&mdash;&nbsp; Limited drop: 72 pieces remaining
       </div>
 
       <header
@@ -45,9 +50,9 @@ export function Header({ shopName }: HeaderProps) {
         >
           {/* Left nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map(link => (
+            {leftLinks.map(link => (
               <Link
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 className="text-[11px] font-normal uppercase tracking-[0.12em] transition-opacity hover:opacity-70"
                 style={{ color: 'var(--color-text)' }}
@@ -67,20 +72,38 @@ export function Header({ shopName }: HeaderProps) {
           </Link>
 
           {/* Right actions */}
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-6 ml-auto">
+            {/* Desktop right links */}
+            {rightLinks.map(link => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="hidden md:inline-flex text-[11px] font-normal uppercase tracking-[0.12em] transition-opacity hover:opacity-70"
+                style={{ color: 'var(--color-text)' }}
+              >
+                {link.label}
+              </Link>
+            ))}
+
             {/* Cart button */}
             <button
               onClick={openDrawer}
-              className="relative p-2 transition-opacity hover:opacity-70"
+              className="relative flex items-center gap-1.5 transition-opacity hover:opacity-70"
               aria-label="Winkelwagen openen"
             >
-              <ShoppingBag className="h-5 w-5" style={{ color: 'var(--color-text)' }} />
+              <span
+                className="hidden md:inline text-[11px] font-normal uppercase tracking-[0.12em]"
+                style={{ color: 'var(--color-text)' }}
+              >
+                Cart ({totalItems})
+              </span>
+              <ShoppingBag className="md:hidden h-5 w-5" style={{ color: 'var(--color-text)' }} />
               {totalItems > 0 && (
                 <span
-                  className="absolute -top-0.5 -right-0.5 flex items-center justify-center w-4 h-4 text-[10px] font-bold"
+                  className="md:hidden absolute -top-1 -right-1.5 flex items-center justify-center w-4 h-4 text-[9px] font-bold"
                   style={{ backgroundColor: 'var(--color-text)', color: 'var(--color-bg)' }}
                 >
-                  {totalItems > 9 ? '9+' : totalItems}
+                  {totalItems}
                 </span>
               )}
             </button>
@@ -115,9 +138,9 @@ export function Header({ shopName }: HeaderProps) {
               }}
             >
               <nav className="px-6 py-6 flex flex-col gap-1">
-                {navLinks.map(link => (
+                {[...leftLinks, ...rightLinks].map(link => (
                   <Link
-                    key={link.href}
+                    key={link.label}
                     href={link.href}
                     className="py-3 text-[11px] font-normal uppercase tracking-[0.15em] transition-opacity hover:opacity-70"
                     style={{ color: 'var(--color-text)' }}
