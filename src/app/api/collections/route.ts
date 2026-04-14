@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   const params: Record<string, string> = { shop_id: SHOP_ID };
   if (handle) params.handle = handle;
 
-  const { data, error } = await rivoGet('storefront-collections', params);
+  const { data, error } = await rivoGet('collections', params);
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json(data);
 }

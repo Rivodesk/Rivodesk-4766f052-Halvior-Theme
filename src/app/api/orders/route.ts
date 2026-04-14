@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   }
 
   const { data, error } = await rivoGet<{ order: unknown }>(
-    'storefront-orders',
+    'orders',
     { shop_id: SHOP_ID, email, order_number: orderNumber },
   );
   if (error || !data?.order) return NextResponse.json({ error: 'Bestelling niet gevonden' }, { status: 404 });

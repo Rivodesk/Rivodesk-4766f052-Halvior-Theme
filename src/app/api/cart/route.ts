@@ -4,7 +4,7 @@ import { rivoPost, SHOP_ID } from '@/lib/rivodesk';
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { data, error } = await rivoPost<{ cart: unknown }>('storefront-cart', { ...body, shop_id: SHOP_ID });
+  const { data, error } = await rivoPost<{ cart: unknown }>('cart', { ...body, shop_id: SHOP_ID });
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json(data);
 }

@@ -11,7 +11,7 @@ export async function GET(req: Request) {
   if (!q.trim()) return NextResponse.json({ products: [], total: 0 });
 
   const { data, error } = await rivoGet<{ products: Record<string, unknown>[]; total: number }>(
-    'storefront-search',
+    'search',
     { shop_id: SHOP_ID, q, limit, offset },
   );
   if (error || !data) return NextResponse.json({ error }, { status: 500 });
