@@ -36,13 +36,20 @@ export function RivodeskAnalytics() {
       device_type: getDevice(), screen_width: window.screen.width,
     };
     fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
-    const onLeave = () => {
+    const sendLeave = () => {
       const lp = { ...payload, event_type: 'pageleave', duration_ms: Date.now() - pageStart.current };
-      navigator.sendBeacon ? navigator.sendBeacon(ENDPOINT, JSON.stringify(lp))
-        : fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lp), keepalive: true }).catch(() => {});
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, JSON.stringify(lp));
+      } else {
+        fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lp), keepalive: true }).catch(() => {});
+      }
     };
-    document.addEventListener('visibilitychange', onLeave);
-    return () => document.removeEventListener('visibilitychange', onLeave);
+    document.addEventListener('visibilitychange', sendLeave);
+    // Also fire on SPA route change (component cleanup)
+    return () => {
+      document.removeEventListener('visibilitychange', sendLeave);
+      sendLeave();
+    };
   }, [pathname]);
   return null;
 }

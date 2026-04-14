@@ -6,6 +6,7 @@ import { CartProvider } from '@/theme/components/CartContext';
 import { CartDrawer } from '@/theme/components/CartDrawer';
 import { Header } from '@/theme/components/Header';
 import { Footer } from '@/theme/components/Footer';
+import { RivodeskAnalytics } from '@/theme/RivodeskAnalytics';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <CartProvider>
+          <RivodeskAnalytics />
           <Header shopName="Halvior" />
           <CartDrawer />
           <main>{children}</main>
