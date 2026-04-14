@@ -129,6 +129,7 @@ export interface OrderLineItem {
 }
 
 export interface ShippingAddress {
+  name?: string;
   first_name: string;
   last_name: string;
   address1: string;
